@@ -1,3 +1,4 @@
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import MHFCheckbox from '../src/MHFCheckbox';
 import { RHFControl } from './RHFControl';

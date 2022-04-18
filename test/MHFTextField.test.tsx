@@ -1,3 +1,4 @@
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import MHFTextField from '../src/MHFTextField';
 import { RHFControl } from './RHFControl';

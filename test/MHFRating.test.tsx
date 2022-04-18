@@ -1,3 +1,4 @@
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import MHFRating from '../src/MHFRating';
 import { RHFControl } from './RHFControl';

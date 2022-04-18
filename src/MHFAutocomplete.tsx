@@ -113,7 +113,9 @@ const MHFAutocomplete = ({
           {...rest}
           onBlur={field.onBlur}
           value={field.value}
-          onChange={(e, data: any) => field.onChange(data)}
+          onChange={(_event, value) => {
+            field.onChange(value);
+          }}
           options={options}
           onInputChange={freeSolo ? field.onChange : onInputChange}
           renderInput={(params: any) => (

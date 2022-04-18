@@ -1,3 +1,4 @@
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import MHFLabeledSwitch from '../src/MHFLabeledSwitch';
 import { RHFControl } from './RHFControl';

@@ -1,3 +1,4 @@
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import MHFDatePicker from '../src/MHFDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
