@@ -30,6 +30,12 @@ the MUI documentation for each specific component will explain how each individu
 
 Additional information regarding the organization of RHF Controller's 'rules' prop and RHF states can be found within the Examples tab.
 
+Below is a basic use of how to implement the library.
+
+```js
+npm install mui-hook-forms
+```
+
 ```ts
 import { MHFTextField } from 'mui-hook-forms';
 import { useForm } from 'react-hook-form';
