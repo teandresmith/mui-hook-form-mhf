@@ -1,6 +1,8 @@
 {
   "version": "0.1.0",
   "description": "Component library to streamline and simplify the use of Material UI (MUI) and React-Hook-Form",
+  "repository": "https://github.com/teandresmith/mui-hook-form-mhf",
+  "homepage": "website name",
   "keywords": [
     "Material UI",
     "React Hook Form",
