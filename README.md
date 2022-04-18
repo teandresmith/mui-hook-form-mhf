@@ -1,15 +1,13 @@
 # Mui-Hook-Form (MHF)
 
-MHF is an opinionated use case of React Hook Forms (react-hook-form / RHF) and Material UI v5 (@mui/material / MUI) written in TypeScript.
+MHF is an opinionated use case of React Hook Form (react-hook-form / RHF) and Material UI v5 (@mui/material / MUI) written in TypeScript.
 MHF attempts to simplify and streamline the use of RHF and MUI by providing a set of components that users can use just as if they were normal MUI input components.
 Each component supports majority of MUI's components props and also RHF Controller's 'rules' prop.
 Additionally, all of the components are meant to be used as Uncontrolled components enabling RHF to handle all underlying state.
 
 _As a reminder, MHF can only be used if react-hook-form (RHF), MUI (@mui/material), and @mui/x-date-pickers have been installed_
 
-This storybook is to serve as a quick demo for individuals. It presents many different use cases/available props and additionally, allows users to play with each component's props.
-Submitting each input will log the results to the action console, and will serve as an example on how RHF organizes the data.
-The following components are presented within this storybook:
+The following components are presented within this library:
 
 - MHFAutocomplete
 - MHFCheckbox
@@ -25,12 +23,12 @@ The following components are presented within this storybook:
 
 _In order to use the MHFTimePicker or MHFDatePicker components, they must be wrapped in a LocalizationProvider. For more information, see https://mui.com/x/react-date-pickers/getting-started/ ._
 
-For more information about each component, please check the documentation for each component's 'Canvas' and 'Docs' page. For all of the examples that are presented within the 'Canvas' and 'Docs' page,
-the MUI documentation for each specific component will explain how each individual prop works. This storybook is to only present what is already possible using a MUI component.
+## Implementation
 
-Additional information regarding the organization of RHF Controller's 'rules' prop and RHF states can be found within the Examples tab.
-
-Below is a basic use of how to implement the library.
+For a more detailed look into each component and what it may offer please visit the library's
+dedicated Storybook at
+https://mui-hook-form-mhf.netlify.app/?path=/story/introduction--page . Additionally,
+for more information about specific MUI prop implementation, please visit the corresponding [MUI Component Docs](https://mui.com/material-ui/getting-started/installation/) for the component. Below will only present a very basic example of how to implement the library into your own component.
 
 ```js
 npm install mui-hook-form-mhf
@@ -43,6 +41,20 @@ import { useForm } from 'react-hook-form';
 const Component = () => {
   const methods = useForm();
 
-  return <MHFTextField name="MHFTextField" control={methods.control} />;
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFTextField name="MHFTextField" control={methods.control} />
+    </form>
+  );
 };
 ```
+
+## Links
+
+- [Github](https://github.com/teandresmith/mui-hook-form-mhf)
+- [NPM](https://www.npmjs.com/package/mui-hook-form-mhf)
+- [Playground/Docs](https://mui-hook-form-mhf.netlify.app/?path=/story/introduction--page)
