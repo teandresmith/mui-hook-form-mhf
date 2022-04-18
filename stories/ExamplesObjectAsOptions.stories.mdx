@@ -1,0 +1,423 @@
+import { Meta, Canvas, Source } from '@storybook/addon-docs';
+import MHFSelectObjectAsOptions from './Examples/MHFSelectObjectAsOptions';
+import MHFRadioButtonGroupObjectAsOptions from './Examples/MHFRadioButtonGroupObjectAsOptions';
+import MHFAutocompleteObjectAsOptions from './Examples/MHFAutocompleteObjectAsOptions';
+
+import dedent from 'ts-dedent';
+
+<Meta title="Examples/Object Arrays As Options" />
+
+# Objects Arrays As Options
+
+In MHF, there are a few components that take in a set of options such as
+the MHFSelect, MHFMultipleSelect, MHFAutocomplete, and MHFRadioButtonGroup components.
+As of now, only the MHFAutocomplete and MHFRadioButtonGroup components support an array of objects as options.
+
+Additionally, the MHFAutocomplete is also able to return objects within the form state natively. All other
+components can only return the option label as a string. In the future, it can be considered to provide
+full support for this, but in the mean time, below will present a few examples (in both TypeScript and JavaScript) of achieving object data
+being present in your RHF form data.
+
+- [MHFSelect / MHFMultipleSelect](#mhfselect--mhfmultipleselect---inputting-array-of-objects--putting-associated-object-data-in-form)
+- [MHFRadioButtonGroup](#mhfradiobuttongroup---input--output)
+- [MHFAutocomplete](#mhfautocomplete)
+
+### MHFSelect / MHFMultipleSelect - Inputting array of objects / Putting associated object data in form
+
+<Canvas>
+  <MHFSelectObjectAsOptions />
+</Canvas>
+
+<details>
+<summary>TypeScript</summary>
+
+```ts
+// TypeScript
+type FormData = {
+  country: object | string;
+};
+
+const MHFSelectObjectAsOptions = () => {
+  const methods = useForm<FormData>();
+
+  const exampleObjectArray = [
+    {
+      country: 'United States of America',
+      abbreviation: 'USA',
+      id: 1,
+    },
+    {
+      country: 'Japan',
+      abbreviation: 'JP',
+      id: 2,
+    },
+    {
+      country: 'Germany',
+      abbreviation: 'DE',
+      id: 3,
+    },
+  ];
+
+  const onSubmit = (data: FormData) => {
+    const foundCountry = exampleObjectArray.filter(
+      (item) => item.country === data.country
+    );
+    data.country = foundCountry;
+
+    console.log(data);
+  };
+
+  // Both MHFSelect and MHFMultipleSelect have similar props.
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFSelect
+        name="country"
+        control={methods.control}
+        label="Country"
+        labelId="country-label"
+        selectItemList={exampleObjectArray.map((item) => item.country)}
+        sx={{ width: 300 }}
+      />
+      <br />
+      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+        Submit
+      </Button>
+    </form>
+  );
+};
+```
+
+</details>
+
+<details >
+<summary>JavaScript</summary>
+
+```js
+// JavaScript
+
+const MHFSelectObjectAsOptions = () => {
+  const methods = useForm();
+
+  const exampleObjectArray = [
+    {
+      country: 'United States of America',
+      abbreviation: 'USA',
+      id: 1,
+    },
+    {
+      country: 'Japan',
+      abbreviation: 'JP',
+      id: 2,
+    },
+    {
+      country: 'Germany',
+      abbreviation: 'DE',
+      id: 3,
+    },
+  ];
+
+  const onSubmit = (data) => {
+    const foundCountry = exampleObjectArray.filter(
+      (item) => item.country === data.country
+    );
+    data.country = foundCountry;
+
+    console.log(data);
+  };
+
+  // Both MHFSelect and MHFMultipleSelect have similar props.
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFSelect
+        name="country"
+        control={methods.control}
+        label="Country"
+        labelId="country-label"
+        selectItemList={exampleObjectArray.map((item) => item.country)}
+        sx={{ width: 300 }}
+      />
+      <br />
+      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+        Submit
+      </Button>
+    </form>
+  );
+};
+```
+
+</details>
+
+### MHFRadioButtonGroup - Input / Output
+
+MHFRadioButtonGroup as a built-in method to deal with object arrays named getRadioLabel. Below is an example of how it works.
+example.
+
+<Canvas>
+  <MHFRadioButtonGroupObjectAsOptions />
+</Canvas>
+
+<details>
+<summary>TypeScript</summary>
+
+```ts
+// TypeScript
+
+type FormData = {
+  country: object | string;
+};
+
+const MHFRadioButtonGroupObjectAsOptions = () => {
+  const methods = useForm<FormData>();
+
+  const exampleObjectArray = [
+    {
+      country: 'United States of America',
+      abbreviation: 'USA',
+      id: 1,
+    },
+    {
+      country: 'Japan',
+      abbreviation: 'JP',
+      id: 2,
+    },
+    {
+      country: 'Germany',
+      abbreviation: 'DE',
+      id: 3,
+    },
+    {
+      country: 'All Countries!',
+      abbreviation: 'NO',
+      id: 4,
+    },
+  ];
+
+  const onSubmit = (data: FormData) => {
+    const foundCountry = exampleObjectArray.filter(
+      (item) => item.country === data.country
+    );
+    data.country = foundCountry;
+
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFRadioButtonGroup
+        name="country"
+        control={methods.control}
+        formLabel="Favorite Country"
+        radioLabels={exampleObjectArray}
+        getRadioLabel={(value: any) => value.country}
+        defaultValue={exampleObjectArray[0].country}
+      />
+      <br />
+      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+        Submit
+      </Button>
+    </form>
+  );
+};
+```
+
+</details>
+
+<details>
+<summary>JavaScript</summary>
+
+```js
+// JavaScript
+
+const MHFRadioButtonGroupObjectAsOptions = () => {
+  const methods = useForm();
+
+  const exampleObjectArray = [
+    {
+      country: 'United States of America',
+      abbreviation: 'USA',
+      id: 1,
+    },
+    {
+      country: 'Japan',
+      abbreviation: 'JP',
+      id: 2,
+    },
+    {
+      country: 'Germany',
+      abbreviation: 'DE',
+      id: 3,
+    },
+    {
+      country: 'All Countries!',
+      abbreviation: 'NO',
+      id: 4,
+    },
+  ];
+
+  const onSubmit = (data) => {
+    const foundCountry = exampleObjectArray.filter(
+      (item) => item.country === data.country
+    );
+    data.country = foundCountry;
+
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFRadioButtonGroup
+        name="country"
+        control={methods.control}
+        formLabel="Favorite Country"
+        radioLabels={exampleObjectArray}
+        getRadioLabel={(value: any) => value.country}
+        defaultValue={exampleObjectArray[0].country}
+      />
+      <br />
+      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+        Submit
+      </Button>
+    </form>
+  );
+};
+```
+
+</details>
+
+### MHFAutocomplete
+
+MUI's Auotcomplete component comes with built-in methods to handle object arrays, and MHFAutocomplete takes
+full advantage of that. Below is an example of how to implement it.
+
+<Canvas>
+  <MHFAutocompleteObjectAsOptions />
+</Canvas>
+
+<details>
+
+<summary>TypeScript</summary>
+
+```ts
+// TypeScript
+
+type FormData = {
+  country: object;
+};
+
+const MHFAutocompleteObjectAsOptions = () => {
+  const methods = useForm<FormData>();
+
+  const exampleObjectArray = [
+    {
+      label: 'United States of America',
+      country: 'United States of America',
+      abbreviation: 'USA',
+      id: 1,
+    },
+    {
+      label: 'Japan',
+      country: 'Japan',
+      abbreviation: 'JP',
+      id: 2,
+    },
+    {
+      label: 'Germany',
+      country: 'Germany',
+      abbreviation: 'DE',
+      id: 3,
+    },
+    {
+      label: 'All Countries',
+      country: 'All Countries!',
+      abbreviation: 'NO',
+      id: 4,
+    },
+  ];
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFAutocomplete
+        name="country"
+        control={methods.control}
+        options={exampleObjectArray}
+        defaultValue={exampleObjectArray[0]}
+        isOptionEqualToValue={(option: any, value: any) =>
+          option.label === value.label
+        }
+      />
+      <br />
+      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+        Submit
+      </Button>
+    </form>
+  );
+};
+```
+
+</details>
+
+<details>
+<summary>JavaScript</summary>
+
+```js
+// JavaScript
+
+const MHFAutocompleteObjectAsOptions = () => {
+  const methods = useForm();
+
+  const exampleObjectArray = [
+    {
+      label: 'United States of America',
+      country: 'United States of America',
+      abbreviation: 'USA',
+      id: 1,
+    },
+    {
+      label: 'Japan',
+      country: 'Japan',
+      abbreviation: 'JP',
+      id: 2,
+    },
+    {
+      label: 'Germany',
+      country: 'Germany',
+      abbreviation: 'DE',
+      id: 3,
+    },
+    {
+      label: 'All Countries',
+      country: 'All Countries!',
+      abbreviation: 'NO',
+      id: 4,
+    },
+  ];
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFAutocomplete
+        name="country"
+        control={methods.control}
+        options={exampleObjectArray}
+        defaultValue={exampleObjectArray[0]}
+        isOptionEqualToValue={(option: any, value: any) =>
+          option.label === value.label
+        }
+      />
+      <br />
+      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+        Submit
+      </Button>
+    </form>
+  );
+};
+```
+
+</details>

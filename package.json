@@ -1,0 +1,82 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "mui/material": ">=5",
+    "react-hook-form": ">=6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "mhf",
+  "author": "Te'Andre Smith",
+  "module": "dist/mhf.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/mhf.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/mhf.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@date-io/moment": "^2.13.1",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.1",
+    "@mui/material": "^5.6.1",
+    "@mui/x-date-pickers": "^5.0.0-alpha.1",
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "@storybook/addon-console": "^1.2.3",
+    "@storybook/addon-essentials": "^6.4.22",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.4.22",
+    "@storybook/addons": "^6.4.22",
+    "@storybook/react": "^6.4.22",
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "babel-loader": "^8.2.4",
+    "husky": "^7.0.4",
+    "moment": "^2.29.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-hook-form": "^7.30.0",
+    "react-is": "^18.0.0",
+    "size-limit": "^7.0.8",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.3"
+  }
+}

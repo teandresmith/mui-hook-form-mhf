@@ -1,0 +1,210 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title='Examples/RHFStates' />
+
+# RHF States
+
+MHF was developed to allow RHF to handle all underlying state. Because of that, all MHF components
+are considered as uncontrolled components. For some, that may be troublesome because they may
+require to access the state throughout its life expectancy (before submission of course).
+
+Thankfully, there are ways to access/see the state before it is submitted if you actually require
+that. Below will be one example in both TypeScript and JavaScript of how it is possible. There may be of course other routes, but
+the point of MHF isn't to completely neutralize RHF, but rather allow the integration between
+MUI and RHF be a bit smoother.
+
+_**Note:** There may be other and more efficient methods, but this is just one opinionated method of accessing RHF form data prior to submission. _
+
+```ts
+// TypeScript
+
+interface FormData {
+  firstName: string
+  lastName: string
+}
+
+const YourComponent = () => {
+  const methods = useForm<FormData>()
+
+  const onSubmit = (data: FormData) => console.log(data)
+
+  // Data can be seen using methods.watch
+  let firstName = methods.watch('firstName')
+
+  // Anytime there is a change being made to firstName, you will be able to see/track.
+  console.log(firstName)
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFTextField name={'firstName'} control={methods.control} />
+      <MHFTextField name={'lastName'} control={methods.control} />
+      <Button type='submit'>Submit</Button>
+    </form>
+  )
+}
+```
+
+```js
+// JavaScript
+
+const YourComponent = () => {
+  const methods = useForm()
+
+  const onSubmit = (data) => console.log(data)
+
+  // Data can be seen using methods.watch
+  let firstName = methods.watch('firstName')
+
+  // Anytime there is a change being made to firstName, you will be able to see/track.
+  console.log(firstName)
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFTextField name={'firstName'} control={methods.control} />
+      <MHFTextField name={'lastName'} control={methods.control} />
+      <Button type='submit'>Submit</Button>
+    </form>
+  )
+}
+```
+
+## Custom Error Messages
+
+Not all of MHF Components provide a helper text to assist with error messages. An example of that
+would be the MHFSlider or MHFLabeledSwitch component. To compensate for this, I am providing a
+simple solution. The trick is to use a MUI 'FormControl' Tag and provide a 'FormHelperText' Tag.
+Below will provide an example of such.
+
+```ts
+// TypeScript
+
+interface FormData {
+  sliderNumber: number
+}
+
+const YourComponent = () => {
+  const methods = useForm<FormData>()
+
+  const onSubmit = (data: FormData) => console.log(data)
+
+  // Data can be seen using methods.watch
+  let sliderNumber = methods.watch('slideNumber')
+  let error = slideNumber < 10
+
+  // Anytime there is a change being made to slideNumber, you will be able to see/track.
+  console.log(slideNumber)
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <FormControl error={error}>
+        <MHFSlider name={'sliderNumber'} control={methods.control} />
+        {slideNumber < 10 && (
+          <FormHelperText>Slider value must be at least 10</FormHelperText>
+        )}
+      </FormControl>
+      <Button type='submit'>Submit</Button>
+    </form>
+  )
+}
+```
+
+```js
+// JavaScript
+
+const YourComponent = () => {
+  const methods = useForm()
+
+  const onSubmit = (data => console.log(data)
+
+  // Data can be seen using methods.watch
+  let sliderNumber = methods.watch('slideNumber')
+  let error = slideNumber < 10
+
+  // Anytime there is a change being made to slideNumber, you will be able to see/track.
+  console.log(slideNumber)
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <FormControl error={error}>
+        <MHFSlider
+          name={'sliderNumber'}
+          control={methods.control}
+        />
+        {slideNumber < 10 && (
+          <FormHelperText>Slider value must be at least 10</FormHelperText>
+        )}
+      </FormControl>
+      <Button type='submit'>Submit</Button>
+    </form>
+  )
+}
+```
+
+A more efficient way of handling this is to use RHF Controller's 'rules' prop. Below will present
+one soluton.
+
+```ts
+// TypeScript
+
+interface FormData {
+  sliderNumber: number
+}
+
+const YourComponent = () => {
+  const methods = useForm<FormData>()
+
+  const onSubmit = (data: FormData) => console.log(data)
+
+  // Data can be seen using methods.watch
+  let sliderNumber = methods.watch('slideNumber')
+
+  const rules = { min: { value: 10 } }
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <FormControl error={methods.formState?.errors ? true : false}>
+        <MHFSlider
+          name={'sliderNumber'}
+          control={methods.control}
+          rules={rules}
+        />
+        {methods.formState?.errors && (
+          <FormHelperText>Slider value must be at least 10</FormHelperText>
+        )}
+      </FormControl>
+      <Button type='submit'>Submit</Button>
+    </form>
+  )
+}
+```
+
+```js
+// JavaScript
+
+const YourComponent = () => {
+  const methods = useForm()
+
+  const onSubmit = (data) => console.log(data)
+
+  // Data can be seen using methods.watch
+  let sliderNumber = methods.watch('slideNumber')
+
+  const rules = { min: { value: 10 } }
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <FormControl error={methods.formState.errors ? true : false}>
+        <MHFSlider
+          name={'sliderNumber'}
+          control={methods.control}
+          rules={rules}
+        />
+        {methods.formState?.errors && (
+          <FormHelperText>Slider value must be at least 10</FormHelperText>
+        )}
+      </FormControl>
+      <Button type='submit'>Submit</Button>
+    </form>
+  )
+}
+```

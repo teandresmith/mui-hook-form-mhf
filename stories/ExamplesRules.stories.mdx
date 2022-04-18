@@ -1,0 +1,89 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title='Examples/Rules' />
+
+# Controller Rules Prop Examples
+
+This page will present the organization of RHF Controller's 'rules' prop. To simplify
+documenation, only a few examples will be presented. For more information, please follow the links below.
+
+_React Hook Form goes into detail about the available validation rules at: https://react-hook-form.com/api/useform/register and https://react-hook-form.com/api/usecontroller/controller _
+
+### Max Length / Min Length Rules
+
+In most cases, this rule would only be used with the MHFTextField and MHFAutocomplete.
+It is possible to use it with other components, but it just doesn't make sense to do so in many cases.
+
+```js
+
+const rules = {
+    maxLength: {value: 4, message: 'Maximum character limit is 4'},
+    minLength: {value: 1, message: 'There must be at least 1 character'},
+}
+
+<MHFTextField name={name} control={control} rules={rules} />
+```
+
+### Validate Rule
+
+The validate rule takes in a function that must return a boolean. If it returns true, then
+the validation passes, if it returns false, then the validation fails. This can be used in all
+of the components. Below is an example of using the validate rule for the MHFDatePicker that prevents
+users from selecting any date within April. In all my Date/Time Pickers examples, I use the moment
+date Adapter, so the implementation may be different depending on the adapter use.
+
+```js
+
+const rules = { validate: (data: any) => !data.toString().includes('Apr') }
+
+<LocalizationProvider dateAdapter={AdapterMoment}>
+    <MHFDatePicker name={name} control={methods.control} rules={rules} />
+</LocalizationProvider>
+```
+
+### Pattern Rule
+
+The pattern rule determines validation through RegEx. In most times, this would be used to validate
+email, url or any specfic type of input. You can entirely avoid the requirement of this rule,
+if you would opt to use the MHFTextField's type prop. It supports email, password, file, url and
+many other HMTL5 input types. Nonetheless, below will be an example of how it can be used.
+
+```js
+
+const rules = { pattern: /[A-Za-z]{3}/ }
+
+<MHFTextField name={name} control={control} rules={rules} />
+
+```
+
+### Max and Min Rule
+
+The Min and Max rule can be used when setting a limitation on a numerical input. An example
+of this would be if you used the MHFTextField component and set the type prop to 'number'.
+Below is an example of such use.
+
+```js
+
+const rules = {
+    max: {value: 3, message: 'Number can be no more than 3'},
+    min: {value: 1, message: 'Number can be no less than 1'}
+}
+
+<MHFTextField name={name} control={control} rules={rules} type={'number'} />
+```
+
+### Required Rule
+
+The required rule can almost be ignored as most components have a required prop built into them.
+For components that do not have a required prop, it would probably be best to wrap them in MUI
+'FormControl required' tag so the browser natively handles it. Another benefit of doing it this
+way is that you are able to use a 'FormHelperText' tag to tell the user what is going wrong
+when they are inputting an empty/error result. But, for the sake of documentation, an example
+of the required rule will be below.
+
+```js
+
+const rules = { required: true }
+
+<MHFSlider name={name} control={control} rules={rules} />
+```
