@@ -76,3 +76,7 @@ wrapping the component with a FormGroup component like below
 - [Github](https://github.com/teandresmith/mui-hook-form-mhf)
 - [NPM](https://www.npmjs.com/package/mui-hook-form-mhf)
 - [Playground/Docs](https://mui-hook-form-mhf.netlify.app/?path=/story/introduction--page)
+
+## Change Log
+
+- (1.0.1) Added variant prop to MHFDatePicker.

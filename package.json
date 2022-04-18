@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Component library to streamline and simplify the use of Material UI (MUI) and React-Hook-Form",
   "repository": "https://github.com/teandresmith/mui-hook-form-mhf",
   "homepage": "https://mui-hook-form-mhf.netlify.app/?path=/story/introduction--page",
@@ -7,7 +7,9 @@
     "Material UI",
     "React Hook Form",
     "MUI",
-    "RHF"
+    "RHF",
+    "react",
+    "react-hook-form"
   ],
   "license": "MIT",
   "main": "dist/index.js",
@@ -33,7 +35,9 @@
   },
   "peerDependencies": {
     "react": ">=16",
-    "react-hook-form": ">=7"
+    "react-hook-form": "^7.0.0",
+    "@mui/material": "^5.0.0",
+    "@mui/x-date-pickers": "^5.0.0-alpha.1"
   },
   "husky": {
     "hooks": {

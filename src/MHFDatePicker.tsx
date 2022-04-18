@@ -79,6 +79,7 @@ export type MHFDatePickerProps = {
   toolbarPlaceholder?: React.ReactNode;
   toolbarTitle?: React.ReactNode;
   TransitionComponent?: React.JSXElementConstructor<any>;
+  variant?: 'standard' | 'filled' | 'outlined';
   views?: Array<'day' | 'month' | 'year'>;
 };
 
@@ -91,6 +92,7 @@ const MHFDatePicker = ({
   required,
   rules,
   sx,
+  variant,
   ...rest
 }: MHFDatePickerProps) => {
   return (
@@ -115,6 +117,7 @@ const MHFDatePicker = ({
               }
               error={fieldState?.error ? true : false}
               sx={sx}
+              variant={variant}
             />
           )}
         />
