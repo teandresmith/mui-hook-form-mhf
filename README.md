@@ -34,6 +34,11 @@ for more information about specific MUI prop implementation, please visit the co
 npm install mui-hook-form-mhf
 ```
 
+Each component is wrapped in the React-Hook-Form's Controller component. For that reason,
+each component will need to be passed a control from the useForm hook. Besides the name and
+control prop, each component within the libray behaves just as a regular MUI component would. The
+only difference is that the components are meant to be used an Uncontrolled Component. The storybook docs go in further detail about the implementation.
+
 ```ts
 import { MHFTextField } from 'mui-hook-form-mhf';
 import { useForm } from 'react-hook-form';
@@ -51,6 +56,19 @@ const Component = () => {
     </form>
   );
 };
+```
+
+Components such as MHFLabeledCheckbox and MHFLabeledSwitch are implemented using MUI's FormControlLabel component, so if you would like to create a group. It can easily be done by
+wrapping the component with a FormGroup component like below
+
+```ts
+<FormGroup>
+  <MHFLabeledCheckbox
+    name="MHFLabeledCheckbox"
+    control={methods.control}
+    label="MHFLabeledCheckbox"
+  />
+</FormGroup>
 ```
 
 ## Links
