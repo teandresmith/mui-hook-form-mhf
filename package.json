@@ -44,7 +44,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "mui-hook-forms",
+  "name": "mui-hook-form-mhf",
   "author": "Te'Andre Smith",
   "module": "dist/mhf.esm.js",
   "size-limit": [

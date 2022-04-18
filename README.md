@@ -1,4 +1,4 @@
-# Mui-Hook-Forms (MHF)
+# Mui-Hook-Form (MHF)
 
 MHF is an opinionated use case of React Hook Forms (react-hook-form / RHF) and Material UI v5 (@mui/material / MUI) written in TypeScript.
 MHF attempts to simplify and streamline the use of RHF and MUI by providing a set of components that users can use just as if they were normal MUI input components.
@@ -23,7 +23,7 @@ The following components are presented within this storybook:
 - MHFTextField
 - MHFTimePicker
 
-_In order to use the MHFTimePicker or MHFDatePicker components, they must be wrapped in a LocalizationProvider. For more information, see https://mui.com/x/react-date-pickers/getting-started/ _
+_In order to use the MHFTimePicker or MHFDatePicker components, they must be wrapped in a LocalizationProvider. For more information, see https://mui.com/x/react-date-pickers/getting-started/ ._
 
 For more information about each component, please check the documentation for each component's 'Canvas' and 'Docs' page. For all of the examples that are presented within the 'Canvas' and 'Docs' page,
 the MUI documentation for each specific component will explain how each individual prop works. This storybook is to only present what is already possible using a MUI component.
@@ -33,11 +33,11 @@ Additional information regarding the organization of RHF Controller's 'rules' pr
 Below is a basic use of how to implement the library.
 
 ```js
-npm install mui-hook-forms
+npm install mui-hook-form-mhf
 ```
 
 ```ts
-import { MHFTextField } from 'mui-hook-forms';
+import { MHFTextField } from 'mui-hook-form-mhf';
 import { useForm } from 'react-hook-form';
 
 const Component = () => {
