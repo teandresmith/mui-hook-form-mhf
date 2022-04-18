@@ -1,5 +1,12 @@
 {
   "version": "0.1.0",
+  "description": "Component library to streamline and simplify the use of Material UI (MUI) and React-Hook-Form",
+  "keywords": [
+    "Material UI",
+    "React Hook Form",
+    "MUI",
+    "RHF"
+  ],
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -10,6 +17,7 @@
   "engines": {
     "node": ">=10"
   },
+  "private": false,
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -23,8 +31,7 @@
   },
   "peerDependencies": {
     "react": ">=16",
-    "mui/material": ">=5",
-    "react-hook-form": ">=6"
+    "react-hook-form": ">=7"
   },
   "husky": {
     "hooks": {
@@ -37,7 +44,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "mhf",
+  "name": "mui-hook-forms",
   "author": "Te'Andre Smith",
   "module": "dist/mhf.esm.js",
   "size-limit": [
