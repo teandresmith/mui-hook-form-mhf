@@ -5,7 +5,7 @@ MHF attempts to simplify and streamline the use of RHF and MUI by providing a se
 Each component supports majority of MUI's components props and also RHF Controller's 'rules' prop.
 Additionally, all of the components are meant to be used as Uncontrolled components enabling RHF to handle all underlying state.
 
-_As a reminder, MHF can only be used if both react-hook-form (RHF) and MUI have been installed_
+_As a reminder, MHF can only be used if react-hook-form (RHF), MUI (@mui/material), and @mui/x-date-pickers have been installed_
 
 This storybook is to serve as a quick demo for individuals. It presents many different use cases/available props and additionally, allows users to play with each component's props.
 Submitting each input will log the results to the action console, and will serve as an example on how RHF organizes the data.
