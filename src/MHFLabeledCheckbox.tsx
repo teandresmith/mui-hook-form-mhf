@@ -1,38 +1,37 @@
-import React from 'react'
+import React from 'react';
 import {
   Checkbox,
   FormControlLabel,
   SxProps,
   Theme,
   CheckboxProps,
-} from '@mui/material'
-import { Control, Controller } from 'react-hook-form'
+} from '@mui/material';
+import { Control, Controller } from 'react-hook-form';
 
 export type MHFLabeledCheckboxProps = {
   //Required Props
-  control: Control<any>
-  label: string
-  name: string
+  control: Control<any>;
+  label: string;
+  name: string;
 
   //Optional Props
-  checkedIcon?: React.ReactNode
-  classes?: object
-  color?: CheckboxProps['color']
-  defaultChecked?: boolean
-  disabled?: boolean
-  disableRipple?: boolean
-  icon?: React.ReactNode
-  id?: string
-  indeterminate?: boolean
-  indeterminateIcon?: React.ReactNode
-  inputProps?: object
-  inputRef?: React.Ref<any>
-  labelPlacement?: 'bottom' | 'end' | 'start' | 'top'
-  required?: boolean
-  size?: 'medium' | 'small' | undefined
-  sx?: SxProps<Theme>
-  rules?: object
-}
+  checkedIcon?: React.ReactNode;
+  classes?: object;
+  color?: CheckboxProps['color'];
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  disableRipple?: boolean;
+  icon?: React.ReactNode;
+  id?: string;
+  indeterminate?: boolean;
+  indeterminateIcon?: React.ReactNode;
+  inputProps?: object;
+  labelPlacement?: 'bottom' | 'end' | 'start' | 'top';
+  required?: boolean;
+  size?: 'medium' | 'small' | undefined;
+  sx?: SxProps<Theme>;
+  rules?: object;
+};
 
 const MHFLabeledCheckbox = ({
   name,
@@ -58,10 +57,11 @@ const MHFLabeledCheckbox = ({
       name={name}
       control={control}
       rules={rules}
-      render={({ field }) => (
+      render={({ field: { ref, ...restField } }) => (
         <FormControlLabel
-          {...field}
+          {...restField}
           {...rest}
+          inputRef={ref}
           control={
             <Checkbox
               checkedIcon={checkedIcon}
@@ -81,7 +81,7 @@ const MHFLabeledCheckbox = ({
         />
       )}
     />
-  )
-}
+  );
+};
 
-export default MHFLabeledCheckbox
+export default MHFLabeledCheckbox;

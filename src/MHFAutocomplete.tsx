@@ -109,7 +109,6 @@ const MHFAutocomplete = ({
       rules={rules}
       render={({ field, fieldState }) => (
         <Autocomplete
-          {...field.ref}
           {...rest}
           onBlur={field.onBlur}
           value={field.value}
@@ -121,6 +120,7 @@ const MHFAutocomplete = ({
           renderInput={(params: any) => (
             <TextField
               {...params}
+              inputRef={field.ref}
               variant={variant}
               label={label}
               required={required}

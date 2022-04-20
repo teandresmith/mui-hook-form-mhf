@@ -1,29 +1,29 @@
-import React from 'react'
-import { Controller, Control } from 'react-hook-form'
-import { IconContainerProps, Rating, SxProps, Theme } from '@mui/material'
+import React from 'react';
+import { Controller, Control } from 'react-hook-form';
+import { IconContainerProps, Rating, SxProps, Theme } from '@mui/material';
 
 export type MHFRatingProps = {
   // Required Props
-  name: string
-  control: Control<any>
+  name: string;
+  control: Control<any>;
 
   // Optional Props
-  classes?: object
-  defaultValue?: any
-  disabled?: boolean
-  emptyIcon?: React.ReactNode
-  emptyLabelText?: string
-  getLabelText?: (value: number) => string
-  highlightSelectedOnly?: boolean
-  icon?: React.ReactNode
-  IconContainerComponent?: React.ElementType<IconContainerProps>
-  max?: number
-  precision?: number
-  readOnly?: boolean
-  rules?: object
-  size?: 'small' | 'medium' | 'large'
-  sx?: SxProps<Theme>
-}
+  classes?: object;
+  defaultValue?: any;
+  disabled?: boolean;
+  emptyIcon?: React.ReactNode;
+  emptyLabelText?: string;
+  getLabelText?: (value: number) => string;
+  highlightSelectedOnly?: boolean;
+  icon?: React.ReactNode;
+  IconContainerComponent?: React.ElementType<IconContainerProps>;
+  max?: number;
+  precision?: number;
+  readOnly?: boolean;
+  rules?: object;
+  size?: 'small' | 'medium' | 'large';
+  sx?: SxProps<Theme>;
+};
 
 const MHFRating = ({
   defaultValue,
@@ -49,7 +49,7 @@ const MHFRating = ({
         />
       )}
     />
-  )
-}
+  );
+};
 
-export default MHFRating
+export default MHFRating;

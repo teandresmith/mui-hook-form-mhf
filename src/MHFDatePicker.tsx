@@ -101,10 +101,11 @@ const MHFDatePicker = ({
       control={control}
       defaultValue={defaultValue ? defaultValue : null}
       rules={rules}
-      render={({ field, fieldState }) => (
+      render={({ field: { ref, ...restField }, fieldState }) => (
         <DatePicker
-          {...field}
+          {...restField}
           {...rest}
+          inputRef={ref}
           renderInput={(params) => (
             <TextField
               {...params}

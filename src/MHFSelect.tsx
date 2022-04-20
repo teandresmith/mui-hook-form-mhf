@@ -1,5 +1,5 @@
-import React from 'react'
-import { Controller, Control } from 'react-hook-form'
+import React from 'react';
+import { Controller, Control } from 'react-hook-form';
 import {
   FormControl,
   InputLabel,
@@ -9,44 +9,48 @@ import {
   Theme,
   FormHelperText,
   SelectProps,
-} from '@mui/material'
+} from '@mui/material';
 
 export type MHFSelectProps = {
   // Required Props
-  name: string
-  control: Control<any>
-  selectItemList: Array<any>
-  labelId: string
-  label: string
+  name: string;
+  control: Control<any>;
+  selectItemList: Array<any>;
+  labelId: string;
+  label: string;
 
   // Optional Props
-  autoWidth?: boolean
-  color?: SelectProps['color']
-  classes?: object
-  defaultOpen?: boolean
-  defaultValue?: any
-  formControlSx?: SxProps<Theme>
-  fullWidth?: boolean
-  helperText?: string
-  IconComponent?: React.ElementType
-  id?: string
-  input?: React.ReactElement
-  inputLabelSx?: SxProps<Theme>
-  inputProps?: object
-  MenuProps?: object
-  native?: boolean
-  renderValue?: (value: any) => React.ReactNode
-  required?: boolean
-  rules?: object
-  SelectDisplayProps?: object
-  sx?: SxProps<Theme>
-  variant?: 'filled' | 'outlined' | 'standard'
-}
+  autoWidth?: boolean;
+  color?: SelectProps['color'];
+  classes?: object;
+  defaultOpen?: boolean;
+  defaultValue?: any;
+  formControlSx?: SxProps<Theme>;
+  formHelperTextSx?: SxProps<Theme>;
+  formHelperTextErrorSx?: SxProps<Theme>;
+  fullWidth?: boolean;
+  helperText?: string;
+  IconComponent?: React.ElementType;
+  id?: string;
+  input?: React.ReactElement;
+  inputLabelSx?: SxProps<Theme>;
+  inputProps?: object;
+  MenuProps?: object;
+  native?: boolean;
+  renderValue?: (value: any) => React.ReactNode;
+  required?: boolean;
+  rules?: object;
+  SelectDisplayProps?: object;
+  sx?: SxProps<Theme>;
+  variant?: 'filled' | 'outlined' | 'standard';
+};
 
 const MHFSelect = ({
   color,
   classes,
   formControlSx,
+  formHelperTextSx,
+  formHelperTextErrorSx,
   fullWidth,
   helperText,
   id,
@@ -81,14 +85,16 @@ const MHFSelect = ({
         defaultValue={defaultValue ? defaultValue : ''}
         control={control}
         rules={rules}
-        render={({ field, fieldState }) => (
+        render={({ field: { ref, ...restField }, fieldState }) => (
           <>
             <Select
-              {...field}
+              {...restField}
               {...rest}
               native={native}
               labelId={labelId}
               label={label}
+              error={fieldState?.error ? true : false}
+              inputRef={ref}
             >
               {native ? (
                 <option value={''}></option>
@@ -111,16 +117,20 @@ const MHFSelect = ({
               )}
             </Select>
             {fieldState?.error && (
-              <FormHelperText>
+              <FormHelperText sx={formHelperTextErrorSx || { color: 'red' }}>
                 {fieldState?.error?.message || 'Invalid Input'}
               </FormHelperText>
             )}
-            {helperText && <FormHelperText>{helperText}</FormHelperText>}
+            {helperText && (
+              <FormHelperText sx={formHelperTextSx}>
+                {helperText}
+              </FormHelperText>
+            )}
           </>
         )}
       />
     </FormControl>
-  )
-}
+  );
+};
 
-export default MHFSelect
+export default MHFSelect;

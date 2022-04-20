@@ -90,15 +90,20 @@ const MHFTimePicker = ({
       control={control}
       defaultValue={defaultValue ? defaultValue : null}
       rules={rules}
-      render={({ field, fieldState }) => (
+      render={({ field: { ref, ...restField }, fieldState }) => (
         <TimePicker
-          {...field}
+          {...restField}
           {...rest}
+          inputRef={ref}
           renderInput={(params) => (
             <TextField
               fullWidth={fullWidth}
               required={required}
-              helperText={fieldState?.error ? 'Invalid Time' : helperText}
+              helperText={
+                fieldState?.error
+                  ? fieldState?.error?.message || 'Invalid Time'
+                  : helperText
+              }
               error={fieldState?.error ? true : false}
               sx={sx}
               {...params}

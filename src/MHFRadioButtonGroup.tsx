@@ -31,7 +31,6 @@ export type MHFRadioButtonGroupProps = {
   icon?: React.ReactNode;
   id?: string;
   inputProps?: object;
-  inputRef?: React.Ref<any>;
   required?: boolean;
   row?: boolean;
   size?: 'medium' | 'small' | undefined;
@@ -56,7 +55,6 @@ const MHFRadioButtonGroup = ({
   icon,
   id,
   inputProps,
-  inputRef,
   required,
   row,
   size,
@@ -69,13 +67,13 @@ const MHFRadioButtonGroup = ({
       defaultValue={defaultValue}
       control={control}
       rules={rules}
-      render={({ field }) => (
+      render={({ field: { ref, ...restField } }) => (
         <FormControl sx={formControlSx}>
           <FormLabel id={id} sx={formLabelSx}>
             {formLabel}
           </FormLabel>
 
-          <RadioGroup {...field} row={row}>
+          <RadioGroup {...restField} row={row}>
             {radioLabels.map((item, key) => {
               const isObject = typeof item === 'object';
               const value = isObject ? getRadioLabel?.(item) : item;
@@ -98,7 +96,7 @@ const MHFRadioButtonGroup = ({
                     />
                   }
                   label={value}
-                  inputRef={inputRef}
+                  inputRef={ref}
                   sx={sx}
                   classes={classes}
                 />
