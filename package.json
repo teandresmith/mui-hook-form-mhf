@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Component library to streamline and simplify the use of Material UI (MUI) and React-Hook-Form",
   "repository": "https://github.com/teandresmith/mui-hook-form-mhf",
   "homepage": "https://mui-hook-form-mhf.netlify.app/?path=/story/introduction--page",
