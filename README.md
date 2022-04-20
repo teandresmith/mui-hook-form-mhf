@@ -79,5 +79,5 @@ wrapping the component with a FormGroup component like below
 
 ## Change Log
 
-- (1.0.2) Controller's field.ref is now properply being passed through inputRef prop. Added error to both MHFSelect & MHFMultipleSelect so they properly display color change when an error occurs. Added formHelperTextSx & formHelperTextErrorSx props to MHFSelect & MHFMultipleSelect, allowing custom styling to helperText prop and component's error helper text.
+- (1.0.2) Controller's field.ref is now properly being passed through inputRef prop. Added error to both MHFSelect & MHFMultipleSelect so they properly display color change when an error occurs. Added formHelperTextSx & formHelperTextErrorSx props to MHFSelect & MHFMultipleSelect, allowing custom styling to helperText prop and component's error helper text.
 - (1.0.1) Added variant prop to MHFDatePicker.
