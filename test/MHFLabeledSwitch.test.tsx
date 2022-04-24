@@ -1,19 +1,36 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
-import MHFLabeledSwitch from '../src/MHFLabeledSwitch';
-import { RHFControl } from './RHFControl';
+import { render, screen } from '@testing-library/react';
+import { Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { MHFLabeledSwitch, MHFLabeledSwitchProps } from '../src';
 
-describe('MHFLabeledSwitch', () => {
-  it('Renders component without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
-      <MHFLabeledSwitch
-        name="MHFLabeledSwitch"
-        control={RHFControl()}
-        label="MHFLabeledSwitch"
-      />,
-      div
+describe('<MHFLabeledSwitch />', () => {
+  test('Renders without crashing', () => {
+    render(
+      <MHFLabeledSwitchTest
+        name="MHFLabeledSwitchTest"
+        label="MHFLabeledSwitchTest"
+      />
     );
-    ReactDOM.unmountComponentAtNode(div);
+
+    expect(screen.getByRole('checkbox')).toBeTruthy();
   });
 });
+
+const MHFLabeledSwitchTest = ({
+  name,
+  ...rest
+}: Omit<MHFLabeledSwitchProps, 'control'>) => {
+  const methods = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFLabeledSwitch name={name} control={methods.control} {...rest} />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+};

@@ -34,10 +34,10 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "react": ">=16",
-    "react-hook-form": "^7.0.0",
     "@mui/material": "^5.0.0",
-    "@mui/x-date-pickers": "^5.0.0-alpha.1"
+    "@mui/x-date-pickers": "^5.0.0-alpha.1",
+    "react": ">=16",
+    "react-hook-form": "^7.0.0"
   },
   "husky": {
     "hooks": {
@@ -78,6 +78,8 @@
     "@storybook/addon-links": "^6.4.22",
     "@storybook/addons": "^6.4.22",
     "@storybook/react": "^6.4.22",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^14.1.1",
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "babel-loader": "^8.2.4",

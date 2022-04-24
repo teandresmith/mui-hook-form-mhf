@@ -1,22 +1,40 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
-import MHFMultipleSelect from '../src/MHFMultipleSelect';
+import { render, screen } from '@testing-library/react';
+import { Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { MHFMultipleSelect, MHFMultipleSelectProps } from '../src';
 
-import { RHFControl } from './RHFControl';
-
-describe('MHFMultipleSelect', () => {
-  it('Renders component without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
-      <MHFMultipleSelect
-        name="MHFMultipleSelect"
-        control={RHFControl()}
-        selectItemList={['option1', 'option2', 'option3']}
-        label={'MHFMultipleSelect'}
-        labelId={'label-id'}
-      />,
-      div
+describe('<MHFMultipleSelect />', () => {
+  test('Renders without crashing', () => {
+    render(
+      <MHFMultipleSelectTest
+        name="MHFMultipleSelectTest"
+        label="MHFMultipleSelectTest"
+        labelId="MHFMultipleSelectTest-id"
+        selectItemList={['Yu', 'Jimmy', 'Sarah', 'Jasmine']}
+      />
     );
-    ReactDOM.unmountComponentAtNode(div);
+
+    expect(
+      screen.getByRole('button', { name: /mhfmultipleselecttest /i })
+    ).toBeTruthy();
   });
 });
+
+const MHFMultipleSelectTest = ({
+  name,
+  ...rest
+}: Omit<MHFMultipleSelectProps, 'control'>) => {
+  const methods = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFMultipleSelect name={name} control={methods.control} {...rest} />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+};

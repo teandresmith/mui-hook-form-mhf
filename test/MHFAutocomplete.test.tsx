@@ -1,19 +1,66 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import MHFAutocomplete from '../src/MHFAutocomplete';
-import { RHFControl } from './RHFControl';
+import React from 'react';
+import { screen, render, fireEvent } from '@testing-library/react';
+import { MHFAutocomplete, MHFAutocompleteProps } from '../src';
+import { Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
 
-describe('MHFAutocomplete', () => {
-  it('Renders component without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
-      <MHFAutocomplete
-        name="MHFAutocomplete"
-        control={RHFControl()}
-        options={['option1', 'options2']}
-      />,
-      div
+describe('<MHFAutocomplete />', () => {
+  test('MHFAutocomplete renders without crashing', () => {
+    render(
+      <MHFAutoCompleteTest
+        name={'MHFAutocompleteTest'}
+        options={['option1', 'option2']}
+        isOptionEqualToValue={(option: any, value: any) =>
+          option.label === value.label || value === ''
+        }
+      />
     );
-    ReactDOM.unmountComponentAtNode(div);
+
+    expect(screen.getByRole('combobox')).toBeTruthy();
+  });
+
+  test('MHFAutocomplete value changes after option is clicked', async () => {
+    render(
+      <MHFAutoCompleteTest
+        name={'MHFAutocompleteTest'}
+        options={['option1', 'option2']}
+        isOptionEqualToValue={(option: any, value: any) =>
+          option.label === value.label || value === ''
+        }
+      />
+    );
+
+    const autocomplete = screen.getByRole('combobox');
+
+    expect(autocomplete).toBeTruthy();
+
+    autocomplete.focus();
+
+    fireEvent.change(autocomplete, {
+      target: {
+        value: 'option1',
+      },
+    });
+    fireEvent.keyDown(autocomplete, { key: 'Enter' });
+
+    expect(screen.getByDisplayValue('option1')).toBeTruthy();
   });
 });
+
+const MHFAutoCompleteTest = ({
+  name,
+  ...rest
+}: Omit<MHFAutocompleteProps, 'control'>) => {
+  const methods = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFAutocomplete name={name} control={methods.control} {...rest} />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+};

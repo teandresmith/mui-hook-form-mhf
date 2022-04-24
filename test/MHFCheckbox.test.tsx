@@ -1,15 +1,31 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
-import MHFCheckbox from '../src/MHFCheckbox';
-import { RHFControl } from './RHFControl';
+import { render, screen } from '@testing-library/react';
+import { Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { MHFCheckbox, MHFCheckboxProps } from '../src';
 
-describe('MHFCheckbox', () => {
-  it('Renders component without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
-      <MHFCheckbox name="MHFCheckbox" control={RHFControl()} />,
-      div
-    );
-    ReactDOM.unmountComponentAtNode(div);
+describe('<MHFCheckbox />', () => {
+  test('Renders without crashing', () => {
+    render(<MHFCheckboxTest name="MHFCheckboxTest" />);
+
+    expect(screen.getByRole('checkbox')).toBeTruthy();
   });
 });
+
+const MHFCheckboxTest = ({
+  name,
+  ...rest
+}: Omit<MHFCheckboxProps, 'control'>) => {
+  const methods = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFCheckbox name={name} control={methods.control} {...rest} />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+};

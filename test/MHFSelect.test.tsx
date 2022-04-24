@@ -1,22 +1,37 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
-import MHFSelect from '../src/MHFSelect';
+import { render, screen } from '@testing-library/react';
+import { Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { MHFSelect, MHFSelectProps } from '../src';
 
-import { RHFControl } from './RHFControl';
-
-describe('MHFSelect', () => {
-  it('Renders component without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
-      <MHFSelect
-        name="MHFSelect"
-        control={RHFControl()}
-        selectItemList={['option1', 'option2']}
-        label="MHFSelect"
-        labelId="label-id"
-      />,
-      div
+describe('<MHFSelect />', () => {
+  test('Renders without crashing', () => {
+    render(
+      <MHFSelectTest
+        name="MHFSelectTest"
+        label="MHFSelectTest"
+        labelId="MHFSelectTest-id"
+        selectItemList={['Yu', 'Jimmy', 'Sarah', 'Jasmine']}
+      />
     );
-    ReactDOM.unmountComponentAtNode(div);
+
+    expect(
+      screen.getByRole('button', { name: /mhfselecttest /i })
+    ).toBeTruthy();
   });
 });
+
+const MHFSelectTest = ({ name, ...rest }: Omit<MHFSelectProps, 'control'>) => {
+  const methods = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFSelect name={name} control={methods.control} {...rest} />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+};

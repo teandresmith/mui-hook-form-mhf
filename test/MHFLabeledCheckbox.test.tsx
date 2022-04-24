@@ -1,19 +1,36 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
-import MHFLabeledCheckbox from '../src/MHFLabeledCheckbox';
-import { RHFControl } from './RHFControl';
+import { render, screen } from '@testing-library/react';
+import { Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { MHFLabeledCheckbox, MHFLabeledCheckboxProps } from '../src';
 
-describe('MHFLabeledCheckbox', () => {
-  it('Renders component without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
-      <MHFLabeledCheckbox
-        name="MHFLabeledCheckbox"
-        control={RHFControl()}
-        label={'MHFLabeledCheckbox'}
-      />,
-      div
+describe('<MHFLabeledCheckbox />', () => {
+  test('Renders without crashing', () => {
+    render(
+      <MHFLabeledCheckboxTest
+        name="MHFLabeledCheckboxTest"
+        label="MHFLabeledCheckBoxTest"
+      />
     );
-    ReactDOM.unmountComponentAtNode(div);
+
+    expect(screen.getByRole('checkbox')).toBeTruthy();
   });
 });
+
+const MHFLabeledCheckboxTest = ({
+  name,
+  ...rest
+}: Omit<MHFLabeledCheckboxProps, 'control'>) => {
+  const methods = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <MHFLabeledCheckbox name={name} control={methods.control} {...rest} />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+};
